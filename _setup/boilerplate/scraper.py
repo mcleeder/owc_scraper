@@ -32,12 +32,10 @@ def main():
         site_name = input("Enter the site name: ").strip()
 
         print(f"\nYou entered:\nSite Name: {site_name}")
-        confirmation = input("Correct? (y/n): y").strip().lower()
+        confirmation = input("Correct? ([y]/n): ").strip().lower()
 
-        if confirmation == 'y':
+        if confirmation in ['', 'y']:
             break
-        else:
-            print("Let's try again.\n")
 
     create_boilerplate(site_name)
 
