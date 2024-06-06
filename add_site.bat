@@ -1,0 +1,1 @@
+python ./_setup/boilerplate/scraper.py
