@@ -3,7 +3,8 @@ import importlib
 
 
 def main():
-    url = input("Enter URL: ")
+    # url = input("Enter URL: ")
+    url = "https://news.yahoo.com/news/fraud-trial-juror-reports-getting-172402539.html"  # flake8: noqa: E501
 
     site_name = _get_site_name(url)
 
@@ -13,7 +14,7 @@ def main():
         )
         site = getattr(module, site_name.title())
 
-    except (ImportError, ArithmeticError):
+    except ImportError:
         print(f"Failed to find site {site_name}")
         return
 

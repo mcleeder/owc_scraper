@@ -10,12 +10,11 @@ from base.comment import Comment
 class {site_name}(Scraper):
 
     SITE_NAME = "{site_name}"
-    BASE_URL : str
 
-    def get_data(self, url: str) -> Any:
+    def get_data(url: str) -> Any:
         ...
 
-    def parse_data(self) -> list[Comment]:
+    def parse_data() -> list[Comment]:
         ...
 """
 

@@ -4,8 +4,7 @@ from base.comment import Comment
 
 class Scraper:
 
-    def __init__(self) -> None:
-        pass
+    COMMENTS_URL = "https://api-2-0.spot.im/v1.0.0/conversation/read"
 
     def get_data(url: str) -> Any:
         """
