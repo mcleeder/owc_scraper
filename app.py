@@ -4,7 +4,7 @@ import importlib
 
 def main():
     # url = input("Enter URL: ")
-    url = "https://news.yahoo.com/news/fraud-trial-juror-reports-getting-172402539.html"  # flake8: noqa: E501
+    url = "https://news.yahoo.com/news/fraud-trial-juror-reports-getting-172402539.html"
 
     site_name = _get_site_name(url)
 
@@ -28,6 +28,7 @@ def main():
 def _get_site_name(url: str):
     parsed_url = urlparse(url)
 
+    # TODO: This'll break on something like .co.uk
     split_url = parsed_url.netloc.split(".")
     return split_url[-2].lower()
 
