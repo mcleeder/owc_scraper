@@ -22,7 +22,7 @@ class {site_name}(Scraper):
     directory = os.path.join("sites", site_name)
     file_path = os.path.join(directory, f"{site_name}.py")
 
-    os.makedirs(directory, exist_ok=True)
+    os.makedirs(directory, exist_ok=False)
 
     with open(file_path, "w") as file:
         file.write(boilerplate_content)
