@@ -46,3 +46,4 @@ Parses the OpenWeb json into Pydantic models.
 1. Scrub data
     - remove html from content.text
 2. Write to database
+3. Make boilerplate setup ask for url
