@@ -40,6 +40,8 @@ Find the `post-id` and return it.
 #### `parse_data(self, json_data: dict) -> list[CommentData]`
 
 Parses the OpenWeb json into Pydantic models.
+Default implementation is usually ok.
+Reccommend Pydantic for validations and small modifications.
 
 ## TODO
 
