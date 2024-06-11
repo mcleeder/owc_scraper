@@ -1,4 +1,4 @@
-# OpenWeb Comment Scraper
+# WIP OpenWeb Comment Scraper
 
 A Python web scraping engine for pulling OpenWeb powered comments off of various sites.
 
