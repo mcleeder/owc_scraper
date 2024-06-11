@@ -62,6 +62,7 @@ class Scraper:
     def parse_data(self, json_data: dict) -> list[CommentData]:
         comments_data = []
         for comment in json_data:
+            filtered_content = self._filter_content(comment["content"])
             comment_obj = CommentData(
                 conversation_id=comment["conversation_id"],
                 root_comment=comment["root_comment"],
@@ -69,12 +70,19 @@ class Scraper:
                 user_id=comment["user_id"],
                 written_at=datetime.fromtimestamp(comment["written_at"]),
                 replies_count=comment["replies_count"],
-                content=[Content(**content) for content in comment["content"]],
+                content=[Content(**content) for content in filtered_content],
                 replies=self._parse_replies(comment.get("replies", [])),
                 rank=Rank(**comment["rank"]),
             )
+
             comments_data.append(comment_obj)
         return comments_data
+
+    def _filter_content(self, content: list[dict]) -> list[dict]:
+        """
+        We sometimes get comments wrapped in user-mentions and context ads
+        """
+        return [c for c in content if all([c.get("id"), c.get("text")])]
 
     def _parse_replies(self, replies: list[dict]) -> list[Comment]:
         comments = []
