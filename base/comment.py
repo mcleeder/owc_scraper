@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import List, Optional, Any
+from typing import Optional, Any
 from datetime import datetime
 
 
@@ -21,8 +21,8 @@ class Comment(BaseModel):
     parent_id: Optional[str]
     user_id: str
     written_at: datetime
-    content: List[Content]
-    replies: List[Any] = Field(default_factory=list)
+    content: list[Content]
+    replies: list[Any] = Field(default_factory=list)
     depth: int
     replies_count: int
     rank: Rank
@@ -35,6 +35,6 @@ class CommentData(BaseModel):
     user_id: str
     written_at: datetime
     replies_count: int
-    content: List[Content]
-    replies: List[Comment] = Field(default_factory=list)
+    content: list[Content]
+    replies: list[Comment] = Field(default_factory=list)
     rank: Rank
