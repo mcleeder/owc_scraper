@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, root_validator
 from typing import Optional, Any
 from datetime import datetime
 
@@ -7,6 +7,12 @@ class Content(BaseModel):
     id: str
     text: str
     type: str
+
+    @root_validator(pre=True)
+    def check_text_or_description(cls, values):
+        if "text" not in values and "description" in values:
+            values["text"] = values.pop("description")
+        return values
 
 
 class Rank(BaseModel):

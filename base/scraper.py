@@ -85,7 +85,7 @@ class Scraper:
                 parent_id=reply.get("parent_id"),
                 user_id=reply["user_id"],
                 written_at=datetime.fromtimestamp(reply["written_at"]),
-                content=[Content(**content) for content in reply["content"]],
+                content=[Content(**content) for content in reply.get("content", "")],
                 replies=self._parse_replies(reply.get("replies", [])),
                 depth=reply["depth"],
                 replies_count=reply["replies_count"],

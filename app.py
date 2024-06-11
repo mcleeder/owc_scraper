@@ -22,7 +22,8 @@ def main():
 
     comments = site.parse_data(raw_data)
 
-    print(comments)
+    # TODO: Send data somewhere
+    print(f"Found {len(comments)} comments")
 
 
 def _get_site_name(url: str):
