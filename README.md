@@ -49,3 +49,4 @@ Reccommend Pydantic for validations and small modifications.
     - remove html from content.text
 2. Write to database
 3. Make boilerplate setup ask for url
+4. Site lookup code needs a refactor
