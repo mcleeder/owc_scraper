@@ -1,6 +1,6 @@
 # WIP OpenWeb Comment Scraper
 
-A Python web scraping engine for pulling OpenWeb powered comments off of various sites.
+A Python web scraping engine for pulling OpenWeb powered comments off of various sites like Yahoo News, NY Post, Stereogum, etc.
 
 ## Installation
 
