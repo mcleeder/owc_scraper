@@ -4,7 +4,7 @@ import importlib
 
 def main():
     # url = input("Enter URL: ")
-    url = "https://news.yahoo.com/news/fraud-trial-juror-reports-getting-172402539.html"
+    url = "https://nypost.com/2024/06/11/us-news/texts-between-hunter-biden-sister-in-law-turned-lover-were-damning-evidence-at-gun-trial-juror-reveals/"  # noqa: E501
 
     site_name = _get_site_name(url)
 

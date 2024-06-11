@@ -24,12 +24,6 @@ class Scraper:
         "child_count": 10,
     }
 
-    HEADERS = {
-        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",  # noqa: E501
-        "x-post-id": None,
-        "x-spot-id": SPOT_ID,
-    }
-
     def get_data(self, url: str) -> dict:
         """
         Get Data
@@ -39,16 +33,20 @@ class Scraper:
         response = web.get(url)
         html_tree = LightElement(response.text)
 
-        self.HEADERS["x-post-id"] = self._get_post_id(html_tree)
+        headers = {
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",  # noqa: E501
+            "x-post-id": None,
+            "x-spot-id": self.SPOT_ID,
+        }
+
+        headers["x-post-id"] = self._get_post_id(html_tree)
 
         # Sets session cookie auth token
-        _ = web.post(
-            url="https://api-2-0.spot.im/v1.0.0/authenticate", headers=self.HEADERS
-        )
+        _ = web.post(url="https://api-2-0.spot.im/v1.0.0/authenticate", headers=headers)
 
         raw_comments = web.post(
             url="https://api-2-0.spot.im/v1.0.0/conversation/read",
-            headers=self.HEADERS,
+            headers=headers,
             json=self.PAYLOAD,
         )
 
