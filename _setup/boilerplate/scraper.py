@@ -19,7 +19,7 @@ class {site_name}(Scraper):
     def get_data(self, url: str) -> Any:
         ...
 
-    def _get_post_id(self, html: LightElement) -> str:
+    def _get_post_id(self, html_tree: LightElement) -> str:
         ...
 
     def parse_data(self, raw_data: Any) -> list[CommentData]:

@@ -9,6 +9,7 @@ from utils.lightscraper import LightElement
 class Scraper:
 
     COMMENTS_URL = "https://api-2-0.spot.im/v1.0.0/conversation/read"
+    AUTH_URL = "https://api-2-0.spot.im/v1.0.0/authenticate"
     SITE_NAME = None
 
     # SPOT_ID is static(?) site id for OpenWeb
@@ -35,29 +36,20 @@ class Scraper:
 
         headers = {
             "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",  # noqa: E501
-            "x-post-id": None,
+            "x-post-id": self._get_post_id(html_tree),
             "x-spot-id": self.SPOT_ID,
         }
 
-        headers["x-post-id"] = self._get_post_id(html_tree)
-
         # Sets session cookie auth token
-        _ = web.post(url="https://api-2-0.spot.im/v1.0.0/authenticate", headers=headers)
+        _ = web.post(url=self.AUTH_URL, headers=headers)
 
         raw_comments = web.post(
-            url="https://api-2-0.spot.im/v1.0.0/conversation/read",
+            url=self.COMMENTS_URL,
             headers=headers,
             json=self.PAYLOAD,
         )
 
         return json.loads(raw_comments.text)["conversation"]["comments"]
-
-    def _get_post_id(self, html_tree: LightElement) -> str:
-        """
-        Parse site page to find post_id attribute (article id)
-        Implement for child sites
-        """
-        ...
 
     def parse_data(self, json_data: dict) -> list[CommentData]:
         comments_data = []
@@ -77,6 +69,13 @@ class Scraper:
 
             comments_data.append(comment_obj)
         return comments_data
+
+    def _get_post_id(self, html_tree: LightElement) -> str:
+        """
+        Parse site page to find post_id attribute (article id)
+        Implement for child sites
+        """
+        ...
 
     def _filter_content(self, content: list[dict]) -> list[dict]:
         """
