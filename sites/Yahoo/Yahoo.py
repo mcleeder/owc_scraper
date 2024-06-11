@@ -12,21 +12,6 @@ class Yahoo(Scraper):
 
     SPOT_ID = "sp_Rba9aFpG"
 
-    PAYLOAD = {
-        "sort_by": "best",
-        "offset": 0,
-        "count": 1,
-        "message_id": None,
-        "depth": 4,
-        "child_count": 10,
-    }
-
-    HEADERS = {
-        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",  # noqa: E501
-        "x-post-id": None,
-        "x-spot-id": SPOT_ID,
-    }
-
     def get_data(self, url: str) -> dict:
         web = session()
 
@@ -48,10 +33,6 @@ class Yahoo(Scraper):
         )
 
         return json.loads(raw_comments.text)["conversation"]["comments"]
-
-    def _write_json(self, json_data) -> None:
-        with open("test.json", "w") as file:
-            json.dump(json_data, file, indent=4)
 
     def parse_data(self, json_data: dict) -> list[CommentData]:
         comments_data = []

@@ -6,12 +6,18 @@ def create_boilerplate(site_name):
 from typing import Any
 from base.scraper import Scraper
 from base.comment import Comment
+from utils.lightscraper import LightElement
 
 class {site_name}(Scraper):
 
     SITE_NAME = "{site_name}"
 
+    SPOT_ID = None
+
     def get_data(url: str) -> Any:
+        ...
+
+    def _get_spot_id(html: LightElement) -> str:
         ...
 
     def parse_data() -> list[Comment]:
